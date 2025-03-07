@@ -16,11 +16,11 @@ class RegistroController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'title' => 'required|string|max:255',
-            'description' => 'nullable|string',
-            'status' => 'required|in:pending,in_progress,completed',
-            'due_date' => 'nullable|date',
-            'priority' => 'required|integer|min:1|max:5',
+            'titulo' => 'required|string|max:255',
+            'descripcion' => 'nullable|string',
+            'valor' => 'nullable|float',
+            'email' => 'nullable|email',
+            'url' => 'nullable|string',
         ]);
         $registro = $request->user()->registros()->create($request->all());
         return new RegistroResource($registro);
@@ -33,7 +33,7 @@ class RegistroController extends Controller
     {
         $this->authorize('update', $registro);
         $validated = $request->validate([
-            'titulo' => 'sometimes|required|string|max:255',
+            'titulo' => 'required|string|max:255',
             'descripcion' => 'nullable|string',
             'valor' => 'nullable|float',
             'email' => 'nullable|email',

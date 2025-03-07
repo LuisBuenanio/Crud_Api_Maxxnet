@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\RegistroController;
+use App\Http\Controllers\HomeController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -26,3 +28,8 @@ Route::middleware([
         return view('dashboard');
     })->name('dashboard');
 });
+
+Route::get('', [HomeController::class, 'index'])->middleware('can:admin.home')->name('admin.home');
+
+
+Route::resource('noticias', RegistroController::class)->except('show')->names('registros');
